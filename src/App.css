@@ -1,16 +1,178 @@
-.app-wrapper {
-    width:1200px;
-    margin :0 auto;
-    display: grid;
-    grid-template-areas:
-    "header header"
-    "nav content ";
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-    grid-gap: 10px;
+.app_body {
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #515184;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.header {
+.app_wrapper{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.bg_white{
+    background-color: #fff !important;
+}
+
+.shadow_xs{
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.03) !important;
+}
+
+.border_0{
+    border: 0 !important;
+    border-top-color: currentcolor;
+    border-top-style: none;
+    border-top-width: 0px;
+    border-right-color: currentcolor;
+    border-right-style: none;
+    border-right-width: 0px;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    border-left-color: currentcolor;
+    border-left-style: none;
+    border-left-width: 0px;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+}
+
+.text-success {
+    color: #10d876 !important;
+}
+.display1-size {
+    font-size: 36px !important;
+}
+.me-2 {
+    margin-right: .5rem !important;
+}
+.ms-0 {
+    margin-left: 0 !important;
+}
+
+[class^="feather-"], [class*=" feather-"] {
+    font-family: 'feather' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fredoka-font {
+    font-family: "Fredoka One",cursive;
+}
+
+.fw-600 {
+    font-weight: 600 !important;
+}
+
+.mb-0 {
+    margin-bottom: 0 !important;
+}
+
+.d-inline-block {
+    display: inline-block !important;
+}
+
+.font-xxl {
+    font-size: 32px !important;
+}
+
+.ls-3 {
+    letter-spacing: 1px;
+}
+
+.text-current {
+    color: var(--theme-color) !important;
+}
+
+.main-content {
+    padding-right: 0;
+}
+
+.main-content {
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    padding-top: 90px;
+    padding-left: 280px;
+    padding-right: 290px;
+    -webkit-transition: all .25s;
+    -o-transition: all .25s;
+    transition: all .25s;
+}
+
+.main-content .middle-sidebar-bottom {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.main-content .middle-sidebar-bottom {
+    width: 100%;
+    padding: 20px 0 10px 0;
+}
+
+.main-content {
+    background-color: #fbfcfe;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.middle-sidebar-bottom{
+    width: 100%;
+    padding: 20px 0 10px 0;
+}
+
+.middle-sidebar {
+    padding-right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 960px;
+}
+
+.row {
+    --bs-gutter-x: 30px;
+    --bs-gutter-y: 0;
+   /* display: flex;
+    flex-wrap: wrap;*/
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x)/ -2);
+    /*margin-left: calc(var(--bs-gutter-x)/ -2);*/
+}
+
+.background-image{
+    width:100%;
+}
+
+/*.header {
     grid-area: header;
     background-color: coral;
 }
@@ -27,4 +189,21 @@
 .content img{
     height: 100px;
     width: 100%;
+}*/
+
+:root {
+    --bs-primary: #1E74FD;
+    --bs-secondary: #673BB7;
+    --bs-success: #10d876;
+    --bs-info: #2754e6;
+    --bs-warning: #FE9431;
+    --bs-danger: #E50202;
+    --bs-light: #f7f7f7;
+    --bs-dark: #343a40;
+    --bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+}
+:root {
+    --f7-theme-color: #132977;
 }

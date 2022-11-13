@@ -1,0 +1,19 @@
+.nav {
+    position: fixed;
+    top: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 280px;
+    height: 100vh;
+    overflow: hidden;
+    background: 0 0;
+    -webkit-transition: width .25s;
+    -o-transition: width .25s;
+    transition: width .25s;
+    padding-top: calc(90px + 6px);
+}
+
+.scroll_bar {
+    margin-left: 0;
+    overflow-y: scroll;
+}

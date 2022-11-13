@@ -1,0 +1,47 @@
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 96px;
+    padding: 0 15px;
+    background: #fff;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 2px #eee solid;
+    -webkit-transition: left .25s;
+    -o-transition: left .25s;
+    transition: left .25s;
+
+}
+
+.header_top{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.zap::before {
+    content: "\ea06";
+}
+
+::before {
+    margin: 0;
+    padding: 0;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
