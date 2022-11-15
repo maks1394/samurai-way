@@ -1,0 +1,39 @@
+.card{
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    width: 100% !important;
+    border: 0 !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.05) !important;
+}
+
+.card_ava_name{
+    display: flex;
+    padding: 0 !important;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.card_ava_name figure{
+
+}
+
+.card_ava_name img{
+    border-radius: 50% !important;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    width: 45px !important;
+    height: 45px !important;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.card_ava_name h4{
+    margin:10px;
+}
