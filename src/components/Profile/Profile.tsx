@@ -1,7 +1,7 @@
 import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 
-export const Profile = () => {
+export function Profile() {
     return (
         <div className={'row'}>
             <div>
