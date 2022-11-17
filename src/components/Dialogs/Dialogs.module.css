@@ -43,6 +43,15 @@
     list-style-image: none;
     list-style-type: none;
     margin: 1px 5px;
+
+}
+.dialogs_items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0.25rem !important;
+    display: flex;
+    flex-direction: column;
 }
 
 .name{
@@ -50,3 +59,27 @@
     padding-left: 25px;
     white-space: nowrap;
 }
+
+.item {
+    align-items: center;
+    padding: 12px 20px 12px 20px;
+    white-space: nowrap;
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #888;
+    height: 54px;
+    display: flex;
+    overflow: hidden;
+    transition: all .2s ease;
+    text-decoration: none;
+    outline: 0;
+}
+
+/*.user_message {*/
+/*    border:1px solid;*/
+/*}*/
+/*.friend_message {*/
+/*    border:1px green solid;*/
+/*}*/

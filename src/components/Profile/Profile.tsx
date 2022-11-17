@@ -1,16 +1,11 @@
 import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export function Profile() {
     return (
         <div className={'row'}>
-            <div>
-                <img className={'background-image'}
-                     src={'https://consolidatedoffice.ca/wp-content/themes/options/images/skins/headers/full_width/header-purpleHaze.jpg'}/>
-            </div>
-            <div>
-                ava+description
-            </div>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     );

@@ -12,8 +12,8 @@ export const MyPosts = () => {
                 </div>
             </div>
             <div>
-                <Post/>
-                <Post/>
+                <Post message={'HI'} likesCount={20}/>
+                <Post message={'Hello'} likesCount={10}/>
             </div>
         </>
     );
