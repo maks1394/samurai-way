@@ -13,33 +13,44 @@ type MessagePropsType = {
 
 
 export function Dialogs() {
-    let dialogsData = [
+    let dialogs = [
         {id: 1, name: 'Dima'},
         {id: 2, name: 'Andrew'},
         {id: 3, name: 'Andrew'},
         {id: 4, name: 'Andrew'},
         {id: 5, name: 'Sasha'}]
 
-    let messagesData = [
+    let messages = [
         {id: 1, message: 'Yo1'},
         {id: 2, message: 'Yo2'},
         {id: 3, message: 'Yo3'},
         {id: 4, message: 'Yo4'},
         {id: 5, message: 'Yo5'}]
 
+    const mappedDialogs = dialogs.map(el => {
+        return (
+            <DialogItem name={el.name} id={el.id}/>
+        )
+    })
+
+    const mappedDialogsMessages = messages.map(el => {
+        return (
+            <Message text={el.message}/>
+        )
+    })
+
     return (
         <div className={s.dialogs_container_flex}>
             <div className={s.dialogs_items}>
                 <div className={s.name}>Dialogs</div>
                 <ul>
-                    <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
-                    <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
-                    <DialogItem name={'Maks3'} id={3}/>
+                    {mappedDialogs}
                 </ul>
             </div>
             <div className={s.dialogs_messages}>
-                <Message text={messagesData[0].message}/>
-                <FriendMassage text={'Hi I am friend'}/>
+                {mappedDialogsMessages}
+                {/*<Message text={messages[0].message}/>
+                <FriendMassage text={'Hi I am friend'}/>*/}
             </div>
         </div>
     );
@@ -63,6 +74,7 @@ const FriendMassage = (props: MessagePropsType) => {
 
 const DialogItem = (props: DialogsItemPropsType) => {
     return (
-        <li><NavLink to={`/dialogs/${props.id}`} className={s.item} activeClassName={s.itemActive}>{props.name}</NavLink></li>
+        <li><NavLink to={`/dialogs/${props.id}`} className={s.item}
+                     activeClassName={s.itemActive}>{props.name}</NavLink></li>
     );
 }

@@ -2,10 +2,15 @@ import React from 'react';
 import {Post} from "./Post/Post";
 
 export const MyPosts = () => {
-    let postsData = [
+    let posts = [
         {id: 1, message: 'Hi how are you', likesCount: 10},
         {id: 2, message: 'It\'s my first post', likesCount: 20},
     ]
+    const mappedPosts = posts.map(el => {
+        return (
+            <Post message={el.message} likesCount={el.likesCount}/>
+        );
+    })
     return (
         <>
             <div>
@@ -16,8 +21,7 @@ export const MyPosts = () => {
                 </div>
             </div>
             <div>
-                <Post message={postsData[0].message} likesCount={postsData[0].likesCount}/>
-                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
+                {mappedPosts}
             </div>
         </>
     );
