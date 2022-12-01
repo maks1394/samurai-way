@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {Post} from "./Post/Post";
 import {PostType} from "../../../redux/state";
 
@@ -11,6 +11,10 @@ export const MyPosts = (props:MyPostsPropsType) => {
         {id: 1, message: 'Hi how are you', likesCount: 10},
         {id: 2, message: 'It\'s my first post', likesCount: 20},
     ]*/
+    const textAreaRef = useRef<HTMLTextAreaElement | null>(null)
+    const addPost = ()=>{
+        alert(textAreaRef.current?.value) //
+    }
     const mappedPosts = props.posts.map(el => {
         return (
             <Post message={el.message} likesCount={el.likesCount}/>
@@ -21,8 +25,8 @@ export const MyPosts = (props:MyPostsPropsType) => {
             <div>
                 My posts
                 <div>
-                    <textarea></textarea>
-                    <button>Add post</button>
+                    <textarea ref={textAreaRef}></textarea>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div>
