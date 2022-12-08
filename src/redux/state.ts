@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../render";
 
 export type PostType = {
     id: number
@@ -18,6 +19,7 @@ export type MessageType = {
 export type StateType = {
     profilePage:{
         posts:PostType[]
+        newPostText:string
     }
     dialogsPage:{
         dialogs:DialogType[]
@@ -30,7 +32,8 @@ export let state:StateType = {
         posts: [
             {id: 1, message: 'Hi how are you', likesCount: 10},
             {id: 2, message: 'It\'s my first post', likesCount: 20}
-        ]
+        ],
+        newPostText:''
     },
     dialogsPage: {
         dialogs: [
@@ -46,4 +49,20 @@ export let state:StateType = {
             {id: 4, message: 'Yo4'},
             {id: 5, message: 'Yo5'}]
     }
+}
+
+export const addPost = () =>{
+    let newPost = {
+        id:5,
+        message:state.profilePage.newPostText,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText=''
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newPostText:string) =>{
+    state.profilePage.newPostText = newPostText
+    rerenderEntireTree(state)
 }

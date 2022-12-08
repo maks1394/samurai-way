@@ -138,8 +138,11 @@
     outline: none !important;
 }
 
-
-
+.chat_form button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /*.user_message {*/
 /*    border:1px solid;*/

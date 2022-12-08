@@ -45,3 +45,9 @@
 *, ::after, ::before {
     box-sizing: border-box;
 }
+
+.icon {
+    color: var(--theme-color) !important;
+    font-size: 22px;
+    margin-right: 6px;
+}

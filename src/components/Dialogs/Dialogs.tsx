@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogType, MessageType} from "../../redux/state";
+import { RiSendPlane2Fill } from "react-icons/ri";
 
 
 type DialogsPropsType = {
@@ -39,7 +40,7 @@ export function Dialogs(props: DialogsPropsType) {
                         <div className={s.input_div}>
                             <input ref={inputRef} placeholder={'Start typing...'}/>
                         </div>
-                        <button onClick={addMessageHandler}>^</button>
+                        <button onClick={addMessageHandler}><RiSendPlane2Fill/></button>
                     </form>
                 </div>
                 {mappedDialogsMessages}

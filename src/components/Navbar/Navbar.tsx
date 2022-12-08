@@ -1,6 +1,10 @@
 import React from 'react';
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { TiMessages,TiNews } from "react-icons/ti";
+import { BiMusic } from "react-icons/bi";
+import { FiSettings } from "react-icons/fi";
 
 export function Navbar() {
     return (
@@ -10,21 +14,21 @@ export function Navbar() {
                 <ul>
                     <li>
                         <NavLink to='/profile' className={s.nav_widget_btn}
-                                 activeClassName={s.activeLink}>Profile</NavLink>
+                                 activeClassName={s.activeLink}><CgProfile/>Profile</NavLink>
                     </li>
                     <li>
                         <NavLink to='/dialogs' className={s.nav_widget_btn}
-                                 activeClassName={s.activeLink}>Messages</NavLink>
+                                 activeClassName={s.activeLink}><TiMessages/>Messages</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/news' className={s.nav_widget_btn} activeClassName={s.activeLink}>News</NavLink>
+                        <NavLink to='/news' className={s.nav_widget_btn} activeClassName={s.activeLink}><TiNews/>News</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/music' className={s.nav_widget_btn} activeClassName={s.activeLink}>Music</NavLink>
+                        <NavLink to='/music' className={s.nav_widget_btn} activeClassName={s.activeLink}><BiMusic/>Music</NavLink>
                     </li>
                     <li>
                         <NavLink to='/settings' className={s.nav_widget_btn}
-                                 activeClassName={s.activeLink}>Settings</NavLink>
+                                 activeClassName={s.activeLink}><FiSettings/>Settings</NavLink>
                     </li>
                 </ul>
             </div>

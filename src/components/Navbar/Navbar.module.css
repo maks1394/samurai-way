@@ -71,6 +71,9 @@
     text-decoration: none;
     outline: 0;
 }
+.nav_widget_btn svg{
+    margin-right: 5px;
+}
 
 .nav_widget_btn:hover{
     color: var(--theme-color);
