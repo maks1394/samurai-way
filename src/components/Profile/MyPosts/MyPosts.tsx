@@ -13,9 +13,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
     const addPost = () => {
         props.addPost()
     }
-    const mappedPosts = props.posts.map(el => {
+    const mappedPosts = props.posts.map((el,index) => {
         return (
-            <Post message={el.message} likesCount={el.likesCount}/>
+            <Post key={index} message={el.message} likesCount={el.likesCount}/>
         );
     })
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

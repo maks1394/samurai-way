@@ -1,7 +1,7 @@
 import React from 'react';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {PostType, updateNewPostText} from "../../redux/state";
+import {PostType} from "../../redux/state";
 
 
 type ProfilePropsType = {
@@ -18,7 +18,7 @@ export function Profile(props: ProfilePropsType) {
         <div className={'row'}>
             <ProfileInfo/>
             <MyPosts posts={props.state.posts} addPost={props.addPost} newPostText={props.state.newPostText}
-                     updateNewPostText={updateNewPostText}/>
+                     updateNewPostText={props.updateNewPostText}/>
         </div>
     );
 }
