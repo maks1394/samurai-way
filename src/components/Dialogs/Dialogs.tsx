@@ -1,29 +1,37 @@
-import React, {createRef, useRef} from "react";
+import React, {ChangeEvent, createRef, RefObject, useRef} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogType, MessageType} from "../../redux/state";
-import { RiSendPlane2Fill } from "react-icons/ri";
+import {
+    ActionType,
+    addMessageActionCreate,
+    DialogType,
+    MessageType,
+    updateNewMessageActionCreate
+} from "../../redux/state";
+import {RiSendPlane2Fill} from "react-icons/ri";
 
 
 type DialogsPropsType = {
     state: {
         dialogs: DialogType[]
         messages: MessageType[]
+        newMessageText: string
     }
+    dispatch: (action: ActionType) => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
-    // const inputRef = useRef<HTMLInputElement>(null);
-    const inputRef = createRef<HTMLInputElement>()
+    const mappedDialogs = props.state.dialogs.map((el, index) => <DialogItem key={index} name={el.name} id={el.id}/>)
 
-
-    const mappedDialogs = props.state.dialogs.map(el => <DialogItem name={el.name} id={el.id}/>)
-
-    const mappedDialogsMessages = props.state.messages.map(el => <Message text={el.message}/>)
-    const addMessageHandler = ()=>{
-        inputRef.current &&
-        alert(inputRef.current.value)
+    const mappedDialogsMessages = props.state.messages.map((el, index) => {
+        return <Message key={index} text={el.message}/>
+    })
+    const addMessageHandler = () => {
+        props.dispatch(addMessageActionCreate())
+    }
+    const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        props.dispatch(updateNewMessageActionCreate(e.currentTarget.value))
     }
 
     return (
@@ -36,12 +44,13 @@ export function Dialogs(props: DialogsPropsType) {
             </div>
             <div className={s.dialogs_messages}>
                 <div className={s.chat_form_container}>
-                    <form className={s.chat_form}>
+                    <div className={s.chat_form}>
                         <div className={s.input_div}>
-                            <input ref={inputRef} placeholder={'Start typing...'}/>
+                            <input onChange={onChangeInputHandler} value={props.state.newMessageText}
+                                   placeholder={'Start typing...'}/>
                         </div>
                         <button onClick={addMessageHandler}><RiSendPlane2Fill/></button>
-                    </form>
+                    </div>
                 </div>
                 {mappedDialogsMessages}
                 {/*<Message text={messages[0].message}/>

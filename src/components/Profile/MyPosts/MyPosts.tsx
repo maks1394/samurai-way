@@ -5,13 +5,13 @@ import {ActionType, addPostActionCreate, PostType, updateNewPostTextActionCreate
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
-    dispatch:(action:ActionType)=>void
+    dispatch: (action: ActionType) => void
 }
 export const MyPosts = (props: MyPostsPropsType) => {
     const addPost = () => {
         props.dispatch(addPostActionCreate())
     }
-    const mappedPosts = props.posts.map((el,index) => {
+    const mappedPosts = props.posts.map((el, index) => {
         return (
             <Post key={index} message={el.message} likesCount={el.likesCount}/>
         );

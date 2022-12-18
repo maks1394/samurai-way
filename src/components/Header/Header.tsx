@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Header.module.css'
-import { IoShareSocialOutline } from "react-icons/io5";
+import {IoShareSocialOutline} from "react-icons/io5";
 
 export const Header = () => {
     return (

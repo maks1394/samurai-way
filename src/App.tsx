@@ -30,7 +30,9 @@ function App(props: PropsType) {
                 <div className={'main-content'}>
                     <div className={'middle-sidebar-bottom'}>
                         <div className={'middle-sidebar'}>
-                            <Route path='/dialogs' render={() => <Dialogs state={state.dialogsPage}/>}/>
+                            <Route path='/dialogs' render={() => <Dialogs
+                                state={state.dialogsPage}
+                                dispatch={props.store.dispatch.bind(props.store)}/>}/>
                             <Route path='/profile' render={() => <Profile
                                 state={state.profilePage}
                                 dispatch={props.store.dispatch.bind(props.store)}/>}/>

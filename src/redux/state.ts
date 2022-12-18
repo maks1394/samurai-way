@@ -3,17 +3,14 @@ export type PostType = {
     message: string
     likesCount: number
 }
-
 export type DialogType = {
     id: number
     name: string
 }
-
 export type MessageType = {
     id: number
     message: string
 }
-
 export type StateType = {
     profilePage: {
         posts: PostType[]
@@ -22,6 +19,7 @@ export type StateType = {
     dialogsPage: {
         dialogs: DialogType[]
         messages: MessageType[]
+        newMessageText: string
     }
 }
 
@@ -30,18 +28,27 @@ export type StoreType = {
     _addPost: () => void
     _callSubscriber: () => void
     _updateNewPostText: (newPostText: string) => void
+    _updateNewMessageText: (text: string) => void
+    _addMessage: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
-    dispatch : (action:ActionType)=>void
+    dispatch: (action: ActionType) => void
 }
 type AddPostActionType = {
-    type:'ADD-POST'
+    type: 'ADD-POST'
 }
 type UpdateNewPostText = {
-    type:'UPDATE-NEW-POST-TEXT'
-    newPostText:string
+    type: 'UPDATE-NEW-POST-TEXT'
+    newPostText: string
 }
-export type ActionType = AddPostActionType | UpdateNewPostText
+type UpdateNewMessageText = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessageText: string
+}
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+}
+export type ActionType = AddPostActionType | UpdateNewPostText | UpdateNewMessageText | AddMessageActionType
 
 const store: StoreType = {
     _state: {
@@ -64,7 +71,8 @@ const store: StoreType = {
                 {id: 2, message: 'Yo2'},
                 {id: 3, message: 'Yo3'},
                 {id: 4, message: 'Yo4'},
-                {id: 5, message: 'Yo5'}]
+                {id: 5, message: 'Yo5'}],
+            newMessageText: ''
         }
     },
     _callSubscriber() {
@@ -91,20 +99,44 @@ const store: StoreType = {
         this._state.profilePage.newPostText = newPostText
         this._callSubscriber()
     },
-    dispatch(action:ActionType) {   // {type:'ADD-POST'}
+    _updateNewMessageText(text: string) {
+        this._state.dialogsPage.newMessageText = text
+        this._callSubscriber()
+    },
+    _addMessage() {
+        const newMessage: MessageType = {
+            id: 10,
+            message: this._state.dialogsPage.newMessageText
+        }
+        this._state.dialogsPage.messages = [newMessage, ...this._state.dialogsPage.messages,]
+        // this._state.dialogsPage.messages.push(newMessage)
+        this._state.dialogsPage.newMessageText = ''
+        this._callSubscriber()
+    },
+    dispatch(action: ActionType) {   // {type:'ADD-POST'}
         if (action.type === 'ADD-POST') {
             this._addPost()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._updateNewPostText(action.newPostText)
+        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+            this._updateNewMessageText(action.newMessageText)
+        } else if (action.type === "ADD-MESSAGE") {
+            this._addMessage()
         }
     }
 }
 type TSExampleType = ReturnType<typeof addPostActionCreate> // How to avoid creating type
-export const addPostActionCreate:()=>ActionType = ()=>{
-    return {type:"ADD-POST"} as const // as const - only for TS
+export const addPostActionCreate: () => ActionType = () => {
+    return {type: "ADD-POST"} as const // as const - only for TS
 }
-export const updateNewPostTextActionCreate:(text:string)=>ActionType = (text)=>{
-    return {type:"UPDATE-NEW-POST-TEXT",newPostText:text} as const
+export const updateNewPostTextActionCreate: (text: string) => ActionType = (text) => {
+    return {type: "UPDATE-NEW-POST-TEXT", newPostText: text} as const
+}
+export const updateNewMessageActionCreate = (text: string): UpdateNewMessageText => {
+    return {type: "UPDATE-NEW-MESSAGE-TEXT", newMessageText: text}
+}
+export const addMessageActionCreate = (): AddMessageActionType => {
+    return {type: "ADD-MESSAGE"}
 }
 export default store
 // for debugging write in console MY_NAMESPACED_NAME
