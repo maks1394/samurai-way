@@ -99,6 +99,13 @@ const store: StoreType = {
         }
     }
 }
+type TSExampleType = ReturnType<typeof addPostActionCreate> // How to avoid creating type
+export const addPostActionCreate:()=>ActionType = ()=>{
+    return {type:"ADD-POST"} as const // as const - only for TS
+}
+export const updateNewPostTextActionCreate:(text:string)=>ActionType = (text)=>{
+    return {type:"UPDATE-NEW-POST-TEXT",newPostText:text} as const
+}
 export default store
 // for debugging write in console MY_NAMESPACED_NAME
 //@ts-ignore TODO cleanup this debug output
