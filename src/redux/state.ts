@@ -27,12 +27,21 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    addPost: () => void
+    _addPost: () => void
     _callSubscriber: () => void
-    updateNewPostText: (newPostText: string) => void
+    _updateNewPostText: (newPostText: string) => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
+    dispatch : (action:ActionType)=>void
 }
+type AddPostActionType = {
+    type:'ADD-POST'
+}
+type UpdateNewPostText = {
+    type:'UPDATE-NEW-POST-TEXT'
+    newPostText:string
+}
+export type ActionType = AddPostActionType | UpdateNewPostText
 
 const store: StoreType = {
     _state: {
@@ -58,7 +67,17 @@ const store: StoreType = {
                 {id: 5, message: 'Yo5'}]
         }
     },
-    addPost() {
+    _callSubscriber() {
+        console.log("State is changed")
+    },
+
+    getState() {
+        return this._state
+    },
+    subscribe(observer: () => void) {
+        this._callSubscriber = observer //pattern observer (same pattern in addEventListener)
+    },
+    _addPost() {
         let newPost = {
             id: 5,
             message: this._state.profilePage.newPostText,
@@ -68,21 +87,19 @@ const store: StoreType = {
         this._state.profilePage.newPostText = ''
         this._callSubscriber()
     },
-    _callSubscriber() {
-        console.log("State is changed")
-    },
-    updateNewPostText(newPostText: string) {
+    _updateNewPostText(newPostText: string) {
         this._state.profilePage.newPostText = newPostText
         this._callSubscriber()
     },
-    subscribe(observer: () => void) {
-        this._callSubscriber = observer //pattern observer (same pattern in addEventListener)
-    },
-    getState() {
-        return this._state
-    },
+    dispatch(action:ActionType) {   // {type:'ADD-POST'}
+        if (action.type === 'ADD-POST') {
+            this._addPost()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            this._updateNewPostText(action.newPostText)
+        }
+    }
 }
 export default store
 // for debugging write in console MY_NAMESPACED_NAME
 //@ts-ignore TODO cleanup this debug output
-globalThis.MY_NAMESPACED_NAME = { something: store }
+globalThis.MY_NAMESPACED_NAME = {something: store}
