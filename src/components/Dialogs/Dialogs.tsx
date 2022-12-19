@@ -4,12 +4,11 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {
     ActionType,
-    addMessageActionCreate,
     DialogType,
     MessageType,
-    updateNewMessageActionCreate
 } from "../../redux/state";
 import {RiSendPlane2Fill} from "react-icons/ri";
+import {addMessageActionCreate, updateNewMessageActionCreate} from "../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {

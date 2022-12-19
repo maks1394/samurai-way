@@ -1,3 +1,6 @@
+import profileReducer, {AddPostActionType, UpdateNewPostText} from "./profile-reducer";
+import dialogsReducer, {AddMessageActionType, UpdateNewMessageText} from "./dialogs-reducer";
+
 export type PostType = {
     id: number
     message: string
@@ -11,16 +14,18 @@ export type MessageType = {
     id: number
     message: string
 }
+export type ProfilePageType = {
+    posts: PostType[]
+    newPostText: string
+}
+export type DialogsPageType = {
+    dialogs:DialogType[]
+    messages:MessageType[]
+    newMessageText:string
+}
 export type StateType = {
-    profilePage: {
-        posts: PostType[]
-        newPostText: string
-    }
-    dialogsPage: {
-        dialogs: DialogType[]
-        messages: MessageType[]
-        newMessageText: string
-    }
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
 }
 
 export type StoreType = {
@@ -34,20 +39,8 @@ export type StoreType = {
     getState: () => StateType
     dispatch: (action: ActionType) => void
 }
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostText = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newPostText: string
-}
-type UpdateNewMessageText = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessageText: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-}
+
+
 export type ActionType = AddPostActionType | UpdateNewPostText | UpdateNewMessageText | AddMessageActionType
 
 const store: StoreType = {
@@ -113,31 +106,14 @@ const store: StoreType = {
         this._state.dialogsPage.newMessageText = ''
         this._callSubscriber()
     },
-    dispatch(action: ActionType) {   // {type:'ADD-POST'}
-        if (action.type === 'ADD-POST') {
-            this._addPost()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._updateNewPostText(action.newPostText)
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-            this._updateNewMessageText(action.newMessageText)
-        } else if (action.type === "ADD-MESSAGE") {
-            this._addMessage()
-        }
+    dispatch(action: ActionType) {// {type:'ADD-POST'}
+        this._state.profilePage=profileReducer(this._state.profilePage,action)
+        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
+        this._callSubscriber()
     }
 }
-type TSExampleType = ReturnType<typeof addPostActionCreate> // How to avoid creating type
-export const addPostActionCreate: () => ActionType = () => {
-    return {type: "ADD-POST"} as const // as const - only for TS
-}
-export const updateNewPostTextActionCreate: (text: string) => ActionType = (text) => {
-    return {type: "UPDATE-NEW-POST-TEXT", newPostText: text} as const
-}
-export const updateNewMessageActionCreate = (text: string): UpdateNewMessageText => {
-    return {type: "UPDATE-NEW-MESSAGE-TEXT", newMessageText: text}
-}
-export const addMessageActionCreate = (): AddMessageActionType => {
-    return {type: "ADD-MESSAGE"}
-}
+// type TSExampleType = ReturnType<typeof addPostActionCreate> // How to avoid creating type
+
 export default store
 // for debugging write in console MY_NAMESPACED_NAME
 //@ts-ignore TODO cleanup this debug output
