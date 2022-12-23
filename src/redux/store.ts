@@ -30,11 +30,7 @@ export type StateType = {
 
 export type StoreType = {
     _state: StateType
-    _addPost: () => void
     _callSubscriber: () => void
-    _updateNewPostText: (newPostText: string) => void
-    _updateNewMessageText: (text: string) => void
-    _addMessage: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
     dispatch: (action: ActionType) => void
@@ -77,34 +73,6 @@ const store: StoreType = {
     },
     subscribe(observer: () => void) {
         this._callSubscriber = observer //pattern observer (same pattern in addEventListener)
-    },
-    _addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber()
-    },
-    _updateNewPostText(newPostText: string) {
-        this._state.profilePage.newPostText = newPostText
-        this._callSubscriber()
-    },
-    _updateNewMessageText(text: string) {
-        this._state.dialogsPage.newMessageText = text
-        this._callSubscriber()
-    },
-    _addMessage() {
-        const newMessage: MessageType = {
-            id: 10,
-            message: this._state.dialogsPage.newMessageText
-        }
-        this._state.dialogsPage.messages = [newMessage, ...this._state.dialogsPage.messages,]
-        // this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.newMessageText = ''
-        this._callSubscriber()
     },
     dispatch(action: ActionType) {// {type:'ADD-POST'}
         this._state.profilePage=profileReducer(this._state.profilePage,action)

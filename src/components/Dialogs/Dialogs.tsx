@@ -6,7 +6,7 @@ import {
     ActionType,
     DialogType,
     MessageType,
-} from "../../redux/state";
+} from "../../redux/store";
 import {RiSendPlane2Fill} from "react-icons/ri";
 import {addMessageActionCreate, updateNewMessageActionCreate} from "../../redux/dialogs-reducer";
 
