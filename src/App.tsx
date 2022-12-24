@@ -1,29 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionType, DialogsPageType, ProfilePageType, StateType, StoreType} from "./redux/store";
-import {EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import StoreContext, {StoreType} from "./StoreContext";
 
-/*type PropsType = {
-    state:StateType
-    addPost:()=>void
-    updateNewPostText:(newPostText:string)=>void
-}*/
 type PropsType = {
-    store: Store<EmptyObject & { profilePage: ProfilePageType; dialogsPage: DialogsPageType; }, ActionType>
+    // store: StoreType
 }
 
 function App(props: PropsType) {
-    const state: StateType = props.store.getState()
-
+    const store:StoreType = useContext(StoreContext)
     return (
         <div className="app_body">
             <div className={'app_wrapper'}>
@@ -32,8 +24,8 @@ function App(props: PropsType) {
                 <div className={'main-content'}>
                     <div className={'middle-sidebar-bottom'}>
                         <div className={'middle-sidebar'}>
-                            <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
-                            <Route path='/profile' render={() => <Profile store={props.store}/>}/>
+                            <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                            <Route path='/profile' render={() => <Profile/>}/>
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/settings' render={() => <Settings/>}/>

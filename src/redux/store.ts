@@ -19,27 +19,27 @@ export type ProfilePageType = {
     newPostText: string
 }
 export type DialogsPageType = {
-    dialogs:DialogType[]
-    messages:MessageType[]
-    newMessageText:string
+    dialogs: DialogType[]
+    messages: MessageType[]
+    newMessageText: string
 }
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
 
-export type StoreType = {
+/*type StoreType = {
     _state: StateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
     getState: () => StateType
     dispatch: (action: ActionType) => void
-}
+}*/
 
 
 export type ActionType = AddPostActionType | UpdateNewPostText | UpdateNewMessageText | AddMessageActionType
 
-const store: StoreType = {
+const store = {
     _state: {
         profilePage: {
             posts: [
@@ -75,8 +75,8 @@ const store: StoreType = {
         this._callSubscriber = observer //pattern observer (same pattern in addEventListener)
     },
     dispatch(action: ActionType) {// {type:'ADD-POST'}
-        this._state.profilePage=profileReducer(this._state.profilePage,action)
-        this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber()
     }
 }

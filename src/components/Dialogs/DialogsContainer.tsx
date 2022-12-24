@@ -1,28 +1,33 @@
 import React from "react";
-import {ActionType, DialogsPageType, ProfilePageType,} from "../../redux/store";
 import {addMessageActionCreate, updateNewMessageActionCreate} from "../../redux/dialogs-reducer";
-import {EmptyObject, Store} from "redux";
 import {Dialogs} from "./Dialogs";
+import StoreContext from "../../StoreContext";
 
 
 type DialogsContainerPropsType = {
-    store: Store<EmptyObject & { profilePage: ProfilePageType; dialogsPage: DialogsPageType; }, ActionType>
+    // store:StoreType
 }
 
 export function DialogsContainer(props: DialogsContainerPropsType) {
-    const addMessageFunctionCreator = () => {
-        return () => props.store.dispatch(addMessageActionCreate())
-    }
-    const updateNewMessageFunctionCreator = () => {
-        return (text: string) => props.store.dispatch(updateNewMessageActionCreate(text))
-    }
     return (
         <>
-            <Dialogs
-                state={props.store.getState().dialogsPage}
-                addMessage={addMessageFunctionCreator()}
-                updateNewMessage={updateNewMessageFunctionCreator()}
-            />
+            <StoreContext.Consumer>
+                {(store) => {
+                    const addMessageFunctionCreator = () => {
+                        return () => store.dispatch(addMessageActionCreate())
+                    }
+                    const updateNewMessageFunctionCreator = () => {
+                        return (text: string) => store.dispatch(updateNewMessageActionCreate(text))
+                    }
+                    return (
+                        <Dialogs
+                            state={store.getState().dialogsPage}
+                            addMessage={addMessageFunctionCreator()}
+                            updateNewMessage={updateNewMessageFunctionCreator()}
+                        />
+                    )
+                }}
+            </StoreContext.Consumer>
         </>
     );
 }
