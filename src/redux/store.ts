@@ -82,7 +82,7 @@ const store: StoreType = {
 }
 // type TSExampleType = ReturnType<typeof addPostActionCreate> // How to avoid creating type
 
-export default store
+export default 1
 // for debugging write in console MY_NAMESPACED_NAME
 //@ts-ignore TODO cleanup this debug output
 globalThis.MY_NAMESPACED_NAME = {something: store}

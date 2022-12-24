@@ -1,16 +1,16 @@
-import React, {ChangeEvent, createRef, useRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import {Post} from "./Post/Post";
-import {ActionType,  PostType} from "../../../redux/store";
-import {addPostActionCreate, updateNewPostTextActionCreate} from "../../../redux/profile-reducer";
+import {PostType} from "../../../redux/store";
 
 type MyPostsPropsType = {
     posts: PostType[]
     newPostText: string
-    dispatch: (action: ActionType) => void
+    addPost: () => void
+    onPostChange: (text: string) => void
 }
 export const MyPosts = (props: MyPostsPropsType) => {
     const addPost = () => {
-        props.dispatch(addPostActionCreate())
+        props.addPost()
     }
     const mappedPosts = props.posts.map((el, index) => {
         return (
@@ -19,7 +19,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     })
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget) {
-            props.dispatch(updateNewPostTextActionCreate(e.currentTarget.value))
+            props.onPostChange(e.currentTarget.value)
         }
     }
     return (

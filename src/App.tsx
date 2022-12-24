@@ -10,6 +10,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {ActionType, DialogsPageType, ProfilePageType, StateType, StoreType} from "./redux/store";
 import {EmptyObject, Store} from "redux";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 /*type PropsType = {
     state:StateType
@@ -31,12 +32,8 @@ function App(props: PropsType) {
                 <div className={'main-content'}>
                     <div className={'middle-sidebar-bottom'}>
                         <div className={'middle-sidebar'}>
-                            <Route path='/dialogs' render={() => <Dialogs
-                                state={state.dialogsPage}
-                                dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                            <Route path='/profile' render={() => <Profile
-                                state={state.profilePage}
-                                dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                            <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
+                            <Route path='/profile' render={() => <Profile store={props.store}/>}/>
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/settings' render={() => <Settings/>}/>

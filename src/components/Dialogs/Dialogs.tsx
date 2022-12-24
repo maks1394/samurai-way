@@ -1,14 +1,9 @@
-import React, {ChangeEvent, createRef, RefObject, useRef} from "react";
+import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {
-    ActionType,
-    DialogType,
-    MessageType,
-} from "../../redux/store";
+import {DialogType, MessageType,} from "../../redux/store";
 import {RiSendPlane2Fill} from "react-icons/ri";
-import {addMessageActionCreate, updateNewMessageActionCreate} from "../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {
@@ -17,7 +12,8 @@ type DialogsPropsType = {
         messages: MessageType[]
         newMessageText: string
     }
-    dispatch: (action: ActionType) => void
+    addMessage: () => void
+    updateNewMessage: (text: string) => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
@@ -27,10 +23,10 @@ export function Dialogs(props: DialogsPropsType) {
         return <Message key={index} text={el.message}/>
     })
     const addMessageHandler = () => {
-        props.dispatch(addMessageActionCreate())
+        props.addMessage()
     }
     const onChangeInputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(updateNewMessageActionCreate(e.currentTarget.value))
+        props.updateNewMessage(e.currentTarget.value)
     }
 
     return (
