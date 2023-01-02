@@ -8,14 +8,12 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import StoreContext, {StoreType} from "./StoreContext";
 
 type PropsType = {
-    // store: StoreType
+    // store: string
 }
 
 function App(props: PropsType) {
-    const store:StoreType = useContext(StoreContext)
     return (
         <div className="app_body">
             <div className={'app_wrapper'}>

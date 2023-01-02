@@ -1,5 +1,5 @@
-import profileReducer, {AddPostActionType, UpdateNewPostText} from "./profile-reducer";
-import dialogsReducer, {AddMessageActionType, UpdateNewMessageText} from "./dialogs-reducer";
+import {AddPostActionType, UpdateNewPostText} from "./profile-reducer";
+import {AddMessageActionType, UpdateNewMessageText} from "./dialogs-reducer";
 
 export type PostType = {
     id: number
@@ -23,10 +23,10 @@ export type DialogsPageType = {
     messages: MessageType[]
     newMessageText: string
 }
-export type StateType = {
+/*export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
-}
+}*/
 
 /*type StoreType = {
     _state: StateType
@@ -39,7 +39,7 @@ export type StateType = {
 
 export type ActionType = AddPostActionType | UpdateNewPostText | UpdateNewMessageText | AddMessageActionType
 
-const store = {
+/*const store = {
     _state: {
         profilePage: {
             posts: [
@@ -79,7 +79,7 @@ const store = {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._callSubscriber()
     }
-}
+}*/
 // type TSExampleType = ReturnType<typeof addPostActionCreate> // How to avoid creating type
 
 export default 1

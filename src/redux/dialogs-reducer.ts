@@ -1,4 +1,5 @@
-import {ActionType, DialogsPageType, MessageType, StateType} from "./store";
+import {ActionType, DialogsPageType, MessageType} from "./store";
+
 export type UpdateNewMessageText = {
     type: 'UPDATE-NEW-MESSAGE-TEXT'
     newMessageText: string
@@ -6,10 +7,12 @@ export type UpdateNewMessageText = {
 export type AddMessageActionType = {
     type: 'ADD-MESSAGE'
 }
-function _updateNewMessageText(state:DialogsPageType,text: string) {
+
+function _updateNewMessageText(state: DialogsPageType, text: string) {
     state.newMessageText = text
 }
-function _addMessage(state:DialogsPageType) {
+
+function _addMessage(state: DialogsPageType) {
     const newMessage: MessageType = {
         id: 10,
         message: state.newMessageText
@@ -34,22 +37,22 @@ const initialState = {
     newMessageText: ''
 }
 
-export const dialogsReducer = (state:DialogsPageType=initialState,action:ActionType):DialogsPageType=>{
+export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
     switch (action.type) {
         case "ADD-MESSAGE":
             _addMessage(state)
-            return state
+            return {...state}
         case "UPDATE-NEW-MESSAGE-TEXT":
-            _updateNewMessageText(state,action.newMessageText)
-            return state
+            _updateNewMessageText(state, action.newMessageText)
+            return {...state}
         default:
             return state
     }
-     /*if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-        _updateNewMessageText(state,action.newMessageText)
-    } else if (action.type === "ADD-MESSAGE") {
-        _addMessage(state)
-    }*/
+    /*if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
+       _updateNewMessageText(state,action.newMessageText)
+   } else if (action.type === "ADD-MESSAGE") {
+       _addMessage(state)
+   }*/
 }
 export const updateNewMessageActionCreate = (text: string): UpdateNewMessageText => {
     return {type: "UPDATE-NEW-MESSAGE-TEXT", newMessageText: text}

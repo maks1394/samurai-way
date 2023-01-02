@@ -5,16 +5,20 @@ import {Message} from "./Message/Message";
 import {DialogType, MessageType,} from "../../redux/store";
 import {RiSendPlane2Fill} from "react-icons/ri";
 
-
-type DialogsPropsType = {
+export type DialogsStateType = {
     state: {
         dialogs: DialogType[]
         messages: MessageType[]
         newMessageText: string
     }
+}
+
+export type DialogsDispatchType = {
     addMessage: () => void
     updateNewMessage: (text: string) => void
 }
+
+type DialogsPropsType = DialogsStateType & DialogsDispatchType
 
 export function Dialogs(props: DialogsPropsType) {
     const mappedDialogs = props.state.dialogs.map((el, index) => <DialogItem key={index} name={el.name} id={el.id}/>)
