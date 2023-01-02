@@ -8,20 +8,6 @@ export type UpdateNewPostText = {
     newPostText: string
 }
 
-function _addPost(state: ProfilePageType) {
-    let newPost = {
-        id: 5,
-        message: state.newPostText,
-        likesCount: 0
-    }
-    state.posts.push(newPost)
-    state.newPostText = ''
-}
-
-function _updateNewPostText(state: ProfilePageType, newPostText: string) {
-    state.newPostText = newPostText
-}
-
 const initialState = {
     posts: [
         {id: 1, message: 'Hi how are you', likesCount: 10},
@@ -33,11 +19,14 @@ const initialState = {
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionType): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
-            _addPost(state)
-            return {...state}
+            let newPost = {
+                id: 5,
+                message: state.newPostText,
+                likesCount: 0
+            }
+            return {...state,posts:[...state.posts,newPost],newPostText:''}
         case "UPDATE-NEW-POST-TEXT":
-            _updateNewPostText(state, action.newPostText)
-            return {...state}
+            return {...state,newPostText:action.newPostText}
         default:
             return state
     }
