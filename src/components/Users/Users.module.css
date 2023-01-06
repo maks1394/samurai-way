@@ -1,0 +1,43 @@
+.card{
+    padding: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    width: calc(33.33% - 10px) !important;
+    border: 0 !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: 15px !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.05) !important;
+}
+.card img{
+    width: 100%;
+}
+
+.button{
+    min-width: 120px;
+    color: #ffffff;
+    background-color: var(--theme-color)!important;
+    /*border:none;*/
+    padding: 0.5rem 1.5rem!important;
+    border-radius: 30px;
+    font-weight: 700!important;
+    border: 1px solid transparent;
+    font-size: 10px!important;
+    line-height: 24px!important;
+    letter-spacing: 1px;
+    font-family: Montserrat,sans-serif;
+}
+.unfollow{
+    color:var(--theme-color)!important ;
+    background-color: #ffffff !important;
+    border: 1px solid var(--theme-color);
+}
+
+.usersContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap:15px;
+}

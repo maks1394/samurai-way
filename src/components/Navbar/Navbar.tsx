@@ -5,6 +5,7 @@ import {CgProfile} from "react-icons/cg";
 import {TiMessages, TiNews} from "react-icons/ti";
 import {BiMusic} from "react-icons/bi";
 import {FiSettings} from "react-icons/fi";
+import {FiUsers} from "react-icons/fi";
 
 export function Navbar() {
     return (
@@ -30,6 +31,10 @@ export function Navbar() {
                     <li>
                         <NavLink to='/settings' className={s.nav_widget_btn}
                                  activeClassName={s.activeLink}><FiSettings/>Settings</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/users' className={s.nav_widget_btn}
+                                 activeClassName={s.activeLink}><FiUsers/>Users</NavLink>
                     </li>
                 </ul>
             </div>
