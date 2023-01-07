@@ -1,12 +1,12 @@
 export type UserType = {
     id: number
-    photoUrl: string
     followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: {
-        city: string
-        country: string
+    uniqueUrlName: string | null
+    photos:{
+        small:string | null
+        large:string | null
     }
 }
 
