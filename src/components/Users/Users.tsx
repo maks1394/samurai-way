@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {UserType} from "../../redux/users-reducer";
 import s from './Users.module.css'
 import axios from "axios";
@@ -13,6 +13,7 @@ export type ActionsPropsType = {
     setUsers: (users: UserType[]) => void
 }
 type PropsType = StatePropsType & ActionsPropsType
+
 export const Users = (props: PropsType) => {
     if (!props.users.length) {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response =>{
