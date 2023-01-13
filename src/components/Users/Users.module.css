@@ -41,3 +41,29 @@
     flex-wrap: wrap;
     gap:15px;
 }
+
+.selectedPage{
+    font-weight: 700;
+}
+
+.pagination{
+    display: flex;
+    width: 500px;
+    border:1px solid var(--theme-color);
+    border-right: none;
+    margin: 0px auto 10px auto;
+}
+
+.item{
+    padding: 5px;
+    background-color: var(--theme-color);
+    color: white;
+    border-right: 1px solid var(--theme-color);
+}
+
+.dotItem{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    font-weight: 900;
+}

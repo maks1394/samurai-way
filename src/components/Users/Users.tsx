@@ -6,11 +6,16 @@ import userPhoto from '../../assets/images/profile-user.png'
 
 export type StatePropsType = {
     users: UserType[]
+    pageSize:number
+    totalUsersCount:number
+    currentPage:number
 }
 export type ActionsPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     setUsers: (users: UserType[]) => void
+    setCurrentPage:(currentPage:number)=>void
+    setTotalUsersCount: (count:number) =>void
 }
 type PropsType = StatePropsType & ActionsPropsType
 
