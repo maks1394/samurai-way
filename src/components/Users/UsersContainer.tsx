@@ -131,4 +131,15 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersC)
+// we can delete AC from AC names and delete right hand of object
+
+let dispatchObject = {
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setTotalUsersCountAC,
+    setIsFetching: setIsFetchingAC,
+}
+
+export const UsersContainer = connect(mapStateToProps, dispatchObject)(UsersC)
