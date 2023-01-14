@@ -24,7 +24,7 @@ function App(props: PropsType) {
                     <div className={'middle-sidebar-bottom'}>
                         <div className={'middle-sidebar'}>
                             <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                            <Route path='/profile' render={() => <ProfileContainer/>}/>
+                            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/settings' render={() => <Settings/>}/>
