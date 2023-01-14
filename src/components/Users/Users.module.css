@@ -42,9 +42,7 @@
     gap:15px;
 }
 
-.selectedPage{
-    font-weight: 700;
-}
+
 
 .pagination{
     display: flex;
@@ -52,6 +50,13 @@
     border:1px solid var(--theme-color);
     border-right: none;
     margin: 0px auto 10px auto;
+}
+
+.paginationWithSmallNumber{
+    margin: 0px auto 10px auto;
+    display: flex;
+    width: max-content;
+    border:1px solid var(--theme-color);
 }
 
 .item{
@@ -66,4 +71,9 @@
     display: flex;
     justify-content: center;
     font-weight: 900;
+}
+
+.selectedPage{
+    font-weight: 700;
+    background-color: #0036A2;
 }
