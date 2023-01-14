@@ -1,28 +1,28 @@
 import {AddPostActionType, UpdateNewPostText} from "./profile-reducer";
 import {AddMessageActionType, UpdateNewMessageText} from "./dialogs-reducer";
 
-export type PostType = {
+/*export type PostType = {
     id: number
     message: string
     likesCount: number
-}
-export type DialogType = {
+}*/
+/*export type DialogType = {
     id: number
     name: string
 }
 export type MessageType = {
     id: number
     message: string
-}
-export type ProfilePageType = {
+}*/
+/*export type ProfilePageType = {
     posts: PostType[]
     newPostText: string
-}
-export type DialogsPageType = {
+}*/
+/*export type DialogsPageType = {
     dialogs: DialogType[]
     messages: MessageType[]
     newMessageText: string
-}
+}*/
 /*export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -37,7 +37,7 @@ export type DialogsPageType = {
 }*/
 
 
-export type ActionType = AddPostActionType | UpdateNewPostText | UpdateNewMessageText | AddMessageActionType
+type ActionType = AddPostActionType | UpdateNewPostText | UpdateNewMessageText | AddMessageActionType
 
 /*const store = {
     _state: {

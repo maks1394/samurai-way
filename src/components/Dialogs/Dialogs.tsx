@@ -2,8 +2,8 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {DialogType, MessageType,} from "../../redux/store";
 import {RiSendPlane2Fill} from "react-icons/ri";
+import {DialogType, MessageType} from "../../redux/dialogs-reducer";
 
 export type DialogsStateType = {
     state: {
