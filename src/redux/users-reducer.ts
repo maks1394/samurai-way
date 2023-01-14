@@ -15,9 +15,10 @@ type StateType = {
     pageSize:number,
     totalUsersCount:number
     currentPage:number
+    isFetching:boolean
 }
 
-type ActionType = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType
+type ActionType = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingACType
 
 const initialState: StateType = {
     users: [
@@ -48,7 +49,8 @@ const initialState: StateType = {
     ],
     pageSize:5,
     totalUsersCount:0,
-    currentPage:2
+    currentPage:2,
+    isFetching:true
 }
 
 export const usersReducer = (state: StateType = initialState, action: ActionType): StateType => {
@@ -73,6 +75,9 @@ export const usersReducer = (state: StateType = initialState, action: ActionType
         }
         case "SET-TOTAL-USERS-COUNT":{
             return {...state,totalUsersCount:action.payload.count}
+        }
+        case "SET-IS-FETCHING":{
+            return {...state,isFetching:action.payload.isFetching}
         }
         default:
             return state
@@ -126,6 +131,16 @@ export const setTotalUsersCountAC = (count:number)=>{
         type:'SET-TOTAL-USERS-COUNT',
         payload:{
             count
+        }
+    } as const
+}
+
+type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
+export const setIsFetchingAC = (isFetching:boolean)=>{
+    return {
+        type:'SET-IS-FETCHING',
+        payload:{
+            isFetching
         }
     } as const
 }
