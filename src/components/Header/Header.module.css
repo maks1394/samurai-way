@@ -12,13 +12,12 @@
     align-items: center;
     height: 96px;
     padding: 0 15px;
-    background: #fff;
     background-color: rgb(255, 255, 255);
     border-bottom: 2px #eee solid;
     -webkit-transition: left .25s;
     -o-transition: left .25s;
     transition: left .25s;
-
+    justify-content: space-between;
 }
 
 .header_top{
@@ -50,4 +49,16 @@
     color: var(--theme-color) !important;
     font-size: 22px;
     margin-right: 6px;
+}
+
+.authContainer{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.loginBlock{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }

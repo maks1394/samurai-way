@@ -9,6 +9,7 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type PropsType = {
     // store: string
@@ -18,7 +19,7 @@ function App(props: PropsType) {
     return (
         <div className="app_body">
             <div className={'app_wrapper'}>
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className={'main-content'}>
                     <div className={'middle-sidebar-bottom'}>
