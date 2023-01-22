@@ -4,6 +4,7 @@ import {UserType} from "../../redux/users-reducer";
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/profile-user.png";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type Props = {
     users: UserType[]
@@ -43,10 +44,37 @@ export const UsersF = (props: Props) => {
                                 </NavLink>
                             </div>
                             <div>
-                                {u.followed ? <button className={s.button + ' ' + s.unfollow}
-                                                      onClick={() => props.unfollow(u.id)}>UNFOLLOW</button> :
+                                {u.followed ?
+                                    <button className={s.button + ' ' + s.unfollow}
+                                            onClick={() => {
+                                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
+                                                    withCredentials: true,
+                                                    headers:{
+                                                        "API-KEY":"bb56c234-8c5c-417c-8bde-ffb61ef1e818"
+                                                    }
+                                                }).then(response => {
+                                                    if (response.data.resultCode ===0){
+                                                        props.unfollow(u.id)
+                                                    }
+                                                })
+                                            }}>UNFOLLOW</button>
+                                    :
                                     <button className={s.button}
-                                            onClick={() => props.follow(u.id)}>FOLLOW</button>}
+                                            onClick={() => {
+                                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{
+                                                    withCredentials: true,
+                                                    headers:{
+                                                        "API-KEY":"bb56c234-8c5c-417c-8bde-ffb61ef1e818"
+                                                    }
+                                                }).then(response => {
+                                                    debugger
+                                                    if (response.data.resultCode ===0){
+                                                        props.follow(u.id)
+                                                    }
+                                                })
+                                                // props.follow(u.id)
+                                            }}>FOLLOW</button>
+                                }
                                 {/*<button>Follow</button>*/}
                             </div>
                         </span>
