@@ -1,24 +1,38 @@
+import {DispatchType} from "./redux-store";
+import {usersAPI} from "../api/api";
+
 export type UserType = {
     id: number
     followed: boolean
     name: string
     status: string
     uniqueUrlName: string | null
-    photos:{
-        small:string | null
-        large:string | null
+    photos: {
+        small: string | null
+        large: string | null
     }
 }
 
 type StateType = {
     users: UserType[]
-    pageSize:number,
-    totalUsersCount:number
-    currentPage:number
-    isFetching:boolean
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    followingInProgress: {
+        [id: number]: boolean
+    }
 }
 
-type ActionType = FollowACType | UnfollowACType | SetUsersACType | SetCurrentPageACType | SetTotalUsersCountACType | SetIsFetchingACType
+type ActionType =
+    FollowACType
+    | UnfollowACType
+    | SetUsersACType
+    | SetCurrentPageACType
+    | SetTotalUsersCountACType
+    | SetIsFetchingACType
+    |
+    SetFollowingInProgressType
 
 const initialState: StateType = {
     users: [
@@ -47,10 +61,11 @@ const initialState: StateType = {
             location: {city: 'Kiev', country: 'Ukraine'}
         },*/
     ],
-    pageSize:5,
-    totalUsersCount:0,
-    currentPage:1,
-    isFetching:true
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
+    followingInProgress: {}
 }
 
 export const usersReducer = (state: StateType = initialState, action: ActionType): StateType => {
@@ -70,20 +85,41 @@ export const usersReducer = (state: StateType = initialState, action: ActionType
         case "SET-USERS": {
             return {...state, users: action.payload.users}
         }
-        case "CHANGE-CURRENT-PAGE":{
-            return {...state,currentPage:action.payload.currentPage}
+        case "CHANGE-CURRENT-PAGE": {
+            return {...state, currentPage: action.payload.currentPage}
         }
-        case "SET-TOTAL-USERS-COUNT":{
-            return {...state,totalUsersCount:action.payload.count}
+        case "SET-TOTAL-USERS-COUNT": {
+            return {...state, totalUsersCount: action.payload.count}
         }
-        case "SET-IS-FETCHING":{
-            return {...state,isFetching:action.payload.isFetching}
+        case "SET-IS-FETCHING": {
+            return {...state, isFetching: action.payload.isFetching}
+        }
+        case "SET-FOLLOWING-IN-PROGRESS": {
+            const copyState = {...state}
+            if (action.payload.isInProgress) {
+                copyState.followingInProgress = {...state.followingInProgress}
+                copyState.followingInProgress[action.payload.id] = action.payload.isInProgress
+            } else {
+                copyState.followingInProgress = {...state.followingInProgress}
+                delete copyState.followingInProgress[action.payload.id]
+            }
+            return copyState
         }
         default:
             return state
     }
 }
 
+type SetFollowingInProgressType = ReturnType<typeof setFollowingInProgress>
+export const setFollowingInProgress = (isInProgress: boolean, id: number) => {
+    return {
+        type: 'SET-FOLLOWING-IN-PROGRESS',
+        payload: {
+            isInProgress,
+            id
+        }
+    } as const
+}
 
 type FollowACType = ReturnType<typeof followAC>
 export const followAC = (userId: number) => {
@@ -116,33 +152,70 @@ export const setUsersAC = (users: UserType[]) => {
 }
 
 type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
-export const setCurrentPageAC = (currentPage:number)=>{
+export const setCurrentPageAC = (currentPage: number) => {
     return {
-        type:'CHANGE-CURRENT-PAGE',
-        payload:{
+        type: 'CHANGE-CURRENT-PAGE',
+        payload: {
             currentPage
         }
     } as const
 }
 
-type SetTotalUsersCountACType= ReturnType<typeof setTotalUsersCountAC>
-export const setTotalUsersCountAC = (count:number)=>{
+type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+export const setTotalUsersCountAC = (count: number) => {
     return {
-        type:'SET-TOTAL-USERS-COUNT',
-        payload:{
+        type: 'SET-TOTAL-USERS-COUNT',
+        payload: {
             count
         }
     } as const
 }
 
 type SetIsFetchingACType = ReturnType<typeof setIsFetchingAC>
-export const setIsFetchingAC = (isFetching:boolean)=>{
+export const setIsFetchingAC = (isFetching: boolean) => {
     return {
-        type:'SET-IS-FETCHING',
-        payload:{
+        type: 'SET-IS-FETCHING',
+        payload: {
             isFetching
         }
     } as const
 }
+
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: DispatchType) => {
+        dispatch(setIsFetchingAC(true))
+        usersAPI.getUsers(currentPage, pageSize).then((data) => {
+            dispatch(setUsersAC(data.items))
+            dispatch(setTotalUsersCountAC(data.totalCount))
+            dispatch(setIsFetchingAC(false))
+        })
+    }
+}
+
+export const unfollow = (userId:number) =>{
+    return (dispatch:DispatchType)=>{
+        dispatch(setFollowingInProgress(true, userId))
+        usersAPI.unfollow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollowAC(userId))
+            }
+            dispatch(setFollowingInProgress(false, userId))
+        })
+    }
+}
+
+export const follow = (userId:number) =>{
+    return (dispatch:DispatchType)=>{
+        dispatch(setFollowingInProgress(true, userId))
+        usersAPI.follow(userId).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(followAC(userId))
+            }
+            dispatch(setFollowingInProgress(false, userId))
+        })
+    }
+}
+
 
 export default usersReducer

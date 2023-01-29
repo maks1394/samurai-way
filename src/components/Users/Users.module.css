@@ -30,6 +30,11 @@
     letter-spacing: 1px;
     font-family: Montserrat,sans-serif;
 }
+
+.button:disabled{
+    opacity: 0.5;
+}
+
 .unfollow{
     color:var(--theme-color)!important ;
     background-color: #ffffff !important;
