@@ -4,6 +4,7 @@ import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {RiSendPlane2Fill} from "react-icons/ri";
 import {DialogType, MessageType} from "../../redux/dialogs-reducer";
+import {Redirect} from "react-router-dom";
 
 export type DialogsStateType = {
     state: {
@@ -11,6 +12,7 @@ export type DialogsStateType = {
         messages: MessageType[]
         newMessageText: string
     }
+    isAuth:boolean
 }
 
 export type DialogsDispatchType = {
@@ -21,6 +23,10 @@ export type DialogsDispatchType = {
 type DialogsPropsType = DialogsStateType & DialogsDispatchType
 
 export function Dialogs(props: DialogsPropsType) {
+
+    if (!props.isAuth){
+        return <Redirect to={'/login'}/>
+    }
     const mappedDialogs = props.state.dialogs.map((el, index) => <DialogItem key={index} name={el.name} id={el.id}/>)
 
     const mappedDialogsMessages = props.state.messages.map((el, index) => {

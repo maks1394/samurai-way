@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {ProfileInfoType, setProfile} from "../../redux/profile-reducer";
 import {Loader} from "../Loader/Loader";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 
 type PathParams = {
     userId:string
@@ -15,6 +15,7 @@ type Props =WithRouterPropsType & {
     profileInfo: ProfileInfoType | null
     isProfileFetching: boolean
     setProfile:(userID:string)=>void
+    isAuth:boolean
 };
 type State = {};
 
@@ -28,6 +29,9 @@ class ProfileClass extends React.Component<Props, State> {
     }
 
     render() {
+        if (!this.props.isAuth){
+            return <Redirect to={'/login'}/>
+        }
         return (
             <div className={'row'}>
                 {this.props.isProfileFetching ? <Loader/> : this.props.profileInfo &&
@@ -41,7 +45,8 @@ class ProfileClass extends React.Component<Props, State> {
 const mapStateToProps = (state: StateType) => {
     return {
         profileInfo: state.profilePage.profileInfo,
-        isProfileFetching: state.profilePage.isProfileFetching
+        isProfileFetching: state.profilePage.isProfileFetching,
+        isAuth:state.auth.isAuth
     }
 }
 
