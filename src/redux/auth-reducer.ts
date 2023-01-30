@@ -1,3 +1,7 @@
+import {DispatchType} from "./redux-store";
+import {authAPI, profileAPI, usersAPI} from "../api/api";
+import {followAC, setFollowingInProgress} from "./users-reducer";
+
 export type AuthStateType = {
     id: number | null
     login: string | null
@@ -45,6 +49,23 @@ export const setUserData = (data: AuthStateType) => {
             ...data
         }
     } as const
+}
+
+export const authMe = ()=>{
+    return (dispatch:DispatchType)=>{
+        authAPI.authMe().then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setUserData(response.data.data))
+                return response.data.data.id
+            }
+        }).then((id) => {
+            return profileAPI.getProfile(id) // for TS
+        }).then((response) => {
+            if (response.status === 200) {
+                dispatch(setAvatarUrl(response.data.photos.small))
+            }
+        })
+    }
 }
 
 export default authReducer

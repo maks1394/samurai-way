@@ -1,3 +1,7 @@
+import {DispatchType} from "./redux-store";
+import axios from "axios";
+import {profileAPI} from "../api/api";
+
 export type AddPostActionType = {
     type: 'ADD-POST'
 }
@@ -95,6 +99,20 @@ export const setIsFetching = (isFetching: boolean) => {
             isFetching
         }
     } as const
+}
+
+export const setProfile = (userID:string)=>{
+    return (dispatch:DispatchType)=>{
+        dispatch(setIsFetching(true))
+        // let userID = userID
+        // if (!userID) {
+        //     userID = '2'
+        // }
+        profileAPI.getProfile(userID).then(response => {
+            dispatch(setProfileInfo(response.data))
+            dispatch(setIsFetching(false))
+        })
+    }
 }
 
 

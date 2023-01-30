@@ -35,6 +35,7 @@ export class UsersC extends React.Component<Props, State> {
 
     onPageChanged = (p: number) => {
         this.props.getUsers(p, this.props.pageSize)
+        this.props.setCurrentPage(p)
     }
 
     render() {
