@@ -101,8 +101,8 @@ export const setIsFetching = (isFetching: boolean) => {
     } as const
 }
 
-export const setProfile = (userID:string)=>{
-    return (dispatch:DispatchType)=>{
+export const setProfile = (userID: string) => {
+    return (dispatch: DispatchType) => {
         dispatch(setIsFetching(true))
         // let userID = userID
         // if (!userID) {

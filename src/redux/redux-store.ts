@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import { applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import usersReducer from "./users-reducer";
@@ -26,6 +26,7 @@ const store = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddlew
 export type StoreType = typeof store
 export type DispatchType = typeof store.dispatch
 export default store
+
 
 //@ts-ignore TODO cleanup this debug output
 globalThis.REDUX_STORE = {store: store}

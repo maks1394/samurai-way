@@ -29,8 +29,8 @@ function App(props: PropsType) {
                             <Route path='/news' render={() => <News/>}/>
                             <Route path='/music' render={() => <Music/>}/>
                             <Route path='/settings' render={() => <Settings/>}/>
-                            <Route path='/users' render={() => <UsersContainer/>}/>
                             <Route path='/login' render={() => <Login/>}/>
+                            <Route path='/users' render={() => <UsersContainer/>}/>
                         </div>
                     </div>
                 </div>

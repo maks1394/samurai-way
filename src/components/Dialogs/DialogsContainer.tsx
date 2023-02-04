@@ -3,11 +3,11 @@ import {ActionDialogsType, addMessageActionCreate, updateNewMessageActionCreate}
 import {Dialogs, DialogsDispatchType, DialogsStateType} from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
+import {RedirectHoc} from "../../hoc/RedirectHOC";
 
 let mapStateToProps = (state: StateType): DialogsStateType => {
     return {
         state: state.dialogsPage,
-        isAuth:state.auth.isAuth
     }
 }
 
@@ -22,5 +22,5 @@ let mapDispatchToProps = (dispatch: (action: ActionDialogsType) => void): Dialog
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+export const DialogsContainer = RedirectHoc(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
 

@@ -7,9 +7,9 @@ type PropsType = {
 }
 
 export const ProfileInfo = (props: PropsType) => {
-    const style:CSSProperties = {
-        width:'101px',
-        height:'101px'
+    const style: CSSProperties = {
+        width: '101px',
+        height: '101px'
     }
     return (
         <>

@@ -12,7 +12,7 @@ export type DialogsStateType = {
         messages: MessageType[]
         newMessageText: string
     }
-    isAuth:boolean
+    // isAuth:boolean
 }
 
 export type DialogsDispatchType = {
@@ -24,9 +24,6 @@ type DialogsPropsType = DialogsStateType & DialogsDispatchType
 
 export function Dialogs(props: DialogsPropsType) {
 
-    if (!props.isAuth){
-        return <Redirect to={'/login'}/>
-    }
     const mappedDialogs = props.state.dialogs.map((el, index) => <DialogItem key={index} name={el.name} id={el.id}/>)
 
     const mappedDialogsMessages = props.state.messages.map((el, index) => {
