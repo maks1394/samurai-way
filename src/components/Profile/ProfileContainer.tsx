@@ -7,6 +7,7 @@ import {ProfileInfoType, setProfile} from "../../redux/profile-reducer";
 import {Loader} from "../Loader/Loader";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {RedirectHoc} from "../../hoc/RedirectHOC";
+import {compose} from "redux";
 
 type PathParams = {
     userId: string
@@ -46,7 +47,8 @@ const mapStateToProps = (state: StateType) => {
     }
 }
 
-
-const ProfileClassWithRouter = withRouter(ProfileClass)
-
-export const ProfileContainer = RedirectHoc(connect(mapStateToProps, {setProfile})(ProfileClassWithRouter))
+export const ProfileContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, {setProfile}),
+    withRouter,
+    RedirectHoc
+)(ProfileClass)

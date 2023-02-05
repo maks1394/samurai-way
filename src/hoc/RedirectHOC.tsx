@@ -5,7 +5,11 @@ import {StateType} from "../redux/redux-store";
 import {Redirect} from "react-router-dom";
 import {ComponentType} from "react";
 
-const mapStateToProps = (state:StateType) =>{
+type MapStateToPropsType = {
+    isAuth:boolean
+}
+
+const mapStateToProps = (state:StateType):MapStateToPropsType =>{
     return {
         isAuth:state.auth.isAuth
     }
@@ -13,13 +17,13 @@ const mapStateToProps = (state:StateType) =>{
 
 export function RedirectHoc  <T>(Component: ComponentType<T>){
     debugger
-    const ComponentWithAuth = (props:any)=>{
+    const ComponentWithAuth = (props:MapStateToPropsType)=>{
         debugger
         let {isAuth,...restProps} = props
         if (!isAuth){
             return <Redirect to={'/login'}/>
         } else {
-            return <Component {...restProps}/>
+            return <Component {...restProps as T} />
         }
     }
 

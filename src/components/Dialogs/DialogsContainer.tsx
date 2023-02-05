@@ -4,6 +4,7 @@ import {Dialogs, DialogsDispatchType, DialogsStateType} from "./Dialogs";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/redux-store";
 import {RedirectHoc} from "../../hoc/RedirectHOC";
+import {compose} from "redux";
 
 let mapStateToProps = (state: StateType): DialogsStateType => {
     return {
@@ -22,5 +23,9 @@ let mapDispatchToProps = (dispatch: (action: ActionDialogsType) => void): Dialog
     }
 }
 
-export const DialogsContainer = RedirectHoc(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
+// export const DialogsContainer = RedirectHoc(connect(mapStateToProps, mapDispatchToProps)(Dialogs))
 
+export const DialogsContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    RedirectHoc
+)(Dialogs)
