@@ -104,10 +104,6 @@ export const setIsFetching = (isFetching: boolean) => {
 export const setProfile = (userID: string) => {
     return (dispatch: DispatchType) => {
         dispatch(setIsFetching(true))
-        // let userID = userID
-        // if (!userID) {
-        //     userID = '2'
-        // }
         profileAPI.getProfile(userID).then(response => {
             dispatch(setProfileInfo(response.data))
             dispatch(setIsFetching(false))

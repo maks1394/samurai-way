@@ -8,6 +8,8 @@ import {
 } from "../../redux/users-reducer";
 import {UsersF} from "./UsersF";
 import {Loader} from "../Loader/Loader";
+import {compose} from "redux";
+import {RedirectHoc} from "../../hoc/RedirectHOC";
 
 type Props = {
     users: UserType[]
@@ -102,4 +104,9 @@ let dispatchObject = {
     follow
 }
 
-export const UsersContainer = connect(mapStateToProps, dispatchObject)(UsersC)
+// export const UsersContainer = connect(mapStateToProps, dispatchObject)(UsersC)
+
+export const UsersContainer = compose<React.ComponentType>(
+    RedirectHoc,
+    connect(mapStateToProps, dispatchObject)
+)(UsersC)

@@ -38,7 +38,7 @@ class ProfileClass extends React.Component<Props, State> {
             </div>
         );
     };
-};
+}
 
 const mapStateToProps = (state: StateType) => {
     return {
@@ -48,7 +48,7 @@ const mapStateToProps = (state: StateType) => {
 }
 
 export const ProfileContainer = compose<React.ComponentType>(
+    RedirectHoc,
     connect(mapStateToProps, {setProfile}),
     withRouter,
-    RedirectHoc
 )(ProfileClass)
