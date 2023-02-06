@@ -17,6 +17,7 @@ type Props = WithRouterPropsType & {
     profileInfo: ProfileInfoType | null
     isProfileFetching: boolean
     setProfile: (userID: string) => void
+    clientUserId:string
 };
 type State = {};
 
@@ -25,7 +26,7 @@ class ProfileClass extends React.Component<Props, State> {
         if (this.props.match.params.userId) {
             this.props.setProfile(this.props.match.params.userId)
         } else {
-            this.props.setProfile('2')
+            this.props.setProfile(this.props.clientUserId)
         }
     }
 
@@ -44,6 +45,7 @@ const mapStateToProps = (state: StateType) => {
     return {
         profileInfo: state.profilePage.profileInfo,
         isProfileFetching: state.profilePage.isProfileFetching,
+        clientUserId :state.auth.id
     }
 }
 
