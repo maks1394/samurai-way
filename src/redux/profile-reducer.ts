@@ -1,4 +1,4 @@
-import {DispatchType} from "./redux-store";
+import {DispatchType, GetStateType} from "./redux-store";
 import axios from "axios";
 import {profileAPI} from "../api/api";
 
@@ -41,19 +41,29 @@ type ProfilePageType = {
     newPostText: string
     profileInfo: ProfileInfoType | null
     isProfileFetching: boolean
+    profileStatus:{
+        status:string
+        temporaryStatus:string
+        editMode:boolean
+    }
 }
 
-const initialState = {
+const initialState:ProfilePageType = {
     posts: [
         {id: 1, message: 'Hi how are you', likesCount: 10},
         {id: 2, message: 'It\'s my first post', likesCount: 20}
     ],
     newPostText: '',
     profileInfo: null,
-    isProfileFetching: false
+    isProfileFetching: false,
+    profileStatus:{
+        status:'',
+        temporaryStatus:'',
+        editMode:false
+    }
 }
 
-type ActionProfileType = AddPostActionType | UpdateNewPostText | setProfileInfo | SetIsFetchingType
+type ActionProfileType = AddPostActionType | UpdateNewPostText | setProfileInfo | SetIsFetchingType | SetProfileStatusACType | SetTemporaryProfileStatusACType | SetEditModeProfileStatusACType
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionProfileType): ProfilePageType => {
     switch (action.type) {
@@ -70,6 +80,12 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {...state, profileInfo: action.payload.profileInfo}
         case "SET-IS-FETCHING":
             return {...state, isProfileFetching: action.payload.isFetching}
+        case "SET-PROFILE-STATUS":
+            return {...state,profileStatus:{...state.profileStatus,status:action.payload.status}}
+        case "SET-TEMPORARY-PROFILE-STATUS":
+            return {...state,profileStatus:{...state.profileStatus,temporaryStatus:action.payload.TemporaryStatus}}
+        case "SET-EDIT-MODE-PROFILE-STATUS":
+            return {...state,profileStatus:{...state.profileStatus,editMode:action.payload.editMode}}
         default:
             return state
     }
@@ -107,6 +123,56 @@ export const setProfile = (userID: string) => {
         profileAPI.getProfile(userID).then(response => {
             dispatch(setProfileInfo(response.data))
             dispatch(setIsFetching(false))
+        })
+    }
+}
+
+type SetProfileStatusACType = ReturnType<typeof setProfileStatusAC>
+const setProfileStatusAC = (status:string)=>{
+    return {
+        type:'SET-PROFILE-STATUS',
+        payload:{
+            status
+        }
+    } as const
+}
+
+type SetTemporaryProfileStatusACType = ReturnType<typeof setTemporaryProfileStatusAC>
+export const setTemporaryProfileStatusAC = (TemporaryStatus:string)=>{
+    return {
+        type:'SET-TEMPORARY-PROFILE-STATUS',
+        payload:{
+            TemporaryStatus
+        }
+    } as const
+}
+
+type SetEditModeProfileStatusACType = ReturnType<typeof setEditModeProfileStatusAC>
+export const setEditModeProfileStatusAC = (editMode:boolean)=>{
+    return {
+        type:'SET-EDIT-MODE-PROFILE-STATUS',
+        payload:{
+            editMode
+        }
+    } as const
+}
+
+export const getProfileStatusTC = (profileId:string)=>{
+    return (dispatch:DispatchType)=>{
+        profileAPI.getProfileStatus(profileId).then(resp => {
+            dispatch(setProfileStatusAC(resp.data))
+            dispatch(setTemporaryProfileStatusAC(resp.data))
+        })
+    }
+}
+
+export const setProfileStatusTC = (status:string)=>{
+    return (dispatch:DispatchType,getState:GetStateType)=>{
+        profileAPI.setProfileStatus(status).then((resp) => {
+            dispatch(setProfileStatusAC(getState().profilePage.profileStatus.temporaryStatus))
+            dispatch(setEditModeProfileStatusAC(false))
+        }).catch(error => {
+            console.log(error)
         })
     }
 }

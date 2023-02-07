@@ -1,9 +1,10 @@
-import { applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {AnyAction, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
-import thunkMiddleware from "redux-thunk"
+import thunkMiddleware, {ThunkDispatch} from "redux-thunk"
+import {useDispatch} from "react-redux";
 
 declare global {
     interface Window {
@@ -25,7 +26,19 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunkMiddleware)))
 export type StoreType = typeof store
 export type DispatchType = typeof store.dispatch
+export type GetStateType = typeof store.getState
 export default store
+
+
+export type TypedDispatch = ThunkDispatch<StateType, any, AnyAction>;
+// export type TypedThunk<ReturnType = void> = ThunkAction<
+//     ReturnType,
+//     RootState,
+//     unknown,
+//     AnyAction
+//     >;
+
+export const useTypedDispatch  = () =>  useDispatch<TypedDispatch>()
 
 
 //@ts-ignore TODO cleanup this debug output
